@@ -3,6 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileUploadDemo", "FileUploadDemo\FileUploadDemo.csproj", "{EF424261-B191-4068-81A6-1D80B48E7435}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileUploadDemo.Tests", "FileUploadDemo.Tests\FileUploadDemo.Tests.csproj", "{9B911C5B-5F48-42E6-925E-611480555CD5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E704D7B5-A2DC-4823-B967-AEC57BAF205C}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +21,10 @@ Global
 		{EF424261-B191-4068-81A6-1D80B48E7435}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF424261-B191-4068-81A6-1D80B48E7435}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF424261-B191-4068-81A6-1D80B48E7435}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B911C5B-5F48-42E6-925E-611480555CD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B911C5B-5F48-42E6-925E-611480555CD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B911C5B-5F48-42E6-925E-611480555CD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B911C5B-5F48-42E6-925E-611480555CD5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

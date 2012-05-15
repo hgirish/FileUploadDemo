@@ -10,7 +10,15 @@ namespace FileUploadDemo.Controllers
 {
   public class FilesController : ApiController
   {
-
+  public HttpResponseMessage Get()
+  {
+    var response = new HttpResponseMessage
+    {
+      StatusCode = HttpStatusCode.OK,
+      Content = new StringContent("Success!")
+    };
+    return response;
+  }
     public HttpResponseMessage Post([FromUri] string fileName)
     {
       if (!Request.Content.IsMimeMultipartContent("form-data"))
@@ -29,6 +37,11 @@ namespace FileUploadDemo.Controllers
       if (!bodyparts.TryGetFormFieldValue("submitter", out submitter))
       {
         submitter = "unknown";
+      }
+      string subfolder;
+      if (!bodyparts.TryGetFormFieldValue("subfolder",out subfolder))
+      {
+        subfolder = "";
       }
 
 
@@ -51,7 +64,7 @@ namespace FileUploadDemo.Controllers
 
         try
         {
-          var savePath = GetSavePath(file.Key);
+          var savePath = GetSavePath(file.Key, subfolder);
           if (File.Exists(savePath))
             File.Delete(savePath);
           File.Move(fileInfo.FullName, savePath);
@@ -68,12 +81,12 @@ namespace FileUploadDemo.Controllers
       {
         StatusCode = HttpStatusCode.Created,
         ReasonPhrase = "Submitter: " + submitter,
-        Content = new StringContent("Submitter: " + submitter)
+        Content = new StringContent("Folder: " + subfolder)
       };
       return response;
       }
       
-    private static string GetSavePath(string fileName)
+    private static string GetSavePath(string fileName,string subfolder)
     {
       if (string.IsNullOrWhiteSpace(fileName))
       {
@@ -82,10 +95,17 @@ namespace FileUploadDemo.Controllers
       fileName = fileName.Replace("\"", "");
 
       string newPath = Path.Combine(HttpContext.Current.Server.MapPath("~/"), "uploads");
+     
+      if (!string.IsNullOrWhiteSpace(subfolder))
+      {
+        newPath = Path.Combine(newPath, subfolder);
+      }
+
       if (!Directory.Exists(newPath))
       {
         Directory.CreateDirectory(newPath);
       }
+
       return Path.Combine(newPath, fileName);
     }
 

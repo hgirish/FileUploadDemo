@@ -2,6 +2,8 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using FileUploadDemo.Secure;
+using WebAPI;
 
 namespace FileUploadDemo
 {
@@ -40,6 +42,14 @@ namespace FileUploadDemo
       RegisterRoutes(RouteTable.Routes);
 
       BundleTable.Bundles.RegisterTemplateBundles();
+
+      var config = GlobalConfiguration.Configuration;
+
+      config.Formatters.Insert(0, new JsonpMediaTypeFormatter());
+
+      //config.MessageHandlers.Add(new HttpsHandler());
+      config.MessageHandlers.Add(new TokenValidationHandler());
+      //config.MessageHandlers.Add(new IPHostValidationHandler());
     }
   }
 }
